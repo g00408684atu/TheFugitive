@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class keyScript : MonoBehaviour
 {
-    public GameObject inticon, key;
+    public GameObject inticon, key , arrow1 , arrow2 , arrow3, monster;
 
     void OnTriggerStay(Collider other)
     {
@@ -16,6 +16,10 @@ public class keyScript : MonoBehaviour
                 key.SetActive(false);
                 Door.keyfound = true;
                 inticon.SetActive(false);
+                arrow1.SetActive(true);
+                arrow2.SetActive(true);
+                arrow3.SetActive(true);
+                monster.SetActive(true);
             }
         }
     }
