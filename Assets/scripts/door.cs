@@ -7,34 +7,37 @@ public class Door : MonoBehaviour
     public GameObject door_closed, door_opened, intText, lockedtext;
     public AudioSource open, close;
     public bool opened, locked;
-    public static bool keyfound;
+    
+    // Remove 'static' so each door tracks its own key state
+    public bool keyfound;
 
-    void Start(){
-        keyfound = false;
-    }
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("MainCamera"))
         {
-            if (opened == false) {
-                if(locked == false){
+            if (!opened)
+            {
+                if (!locked)
+                {
                     intText.SetActive(true);
                     if (Input.GetKey(KeyCode.E))
                     {
                         door_closed.SetActive(false);
                         door_opened.SetActive(true);
                         intText.SetActive(false);
-                        //open.Play();
+                        // open.Play();
                         StartCoroutine(repeat());
                         opened = true;
                     }
-                }   
-                if(locked == true){
+                }
+                else
+                {
                     lockedtext.SetActive(true);
-                } 
+                }
             }
         }
     }
+
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("MainCamera"))
@@ -43,16 +46,21 @@ public class Door : MonoBehaviour
             lockedtext.SetActive(false);
         }
     }
+
     IEnumerator repeat()
     {
         yield return new WaitForSeconds(4.0f);
         opened = false;
         door_closed.SetActive(true);
         door_opened.SetActive(false);
-        //close.Play();
+        // close.Play();
     }
-    void Update(){
-        if(keyfound == true){
+
+    void Update()
+    {
+        // Each door updates based on its own keyfound status
+        if (keyfound)
+        {
             locked = false;
         }
     }
