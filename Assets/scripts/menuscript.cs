@@ -8,10 +8,10 @@ public class menuscript : MonoBehaviour
     public string SceneName;
 
     void Update(){
-        if(Input.GetKey(KeyCode.P)){
+        if(Input.GetKeyDown(KeyCode.P)){
             SceneManager.LoadScene(SceneName);
         }
-        if(Input.GetKey(KeyCode.Escape)){
+        if(Input.GetKeyDown(KeyCode.Escape)){
             Application.Quit();
         }
     }
